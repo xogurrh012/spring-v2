@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +19,15 @@ public class BoardController {
 
     // body : title=title7&content=cotent7 (x-www-form)
     @PostMapping("/boards/save")
-    public String save(BoardSaveDTO reqDto) throws IOException {
-        boardService.게시글쓰기(reqDto.getTitle(), reqDto.getContent());
+    public String save(BoardRequest.SaveOrUpdateDto reqDTO) throws IOException {
+        boardService.게시글쓰기(reqDTO.getTitle(), reqDTO.getContent());
         return "redirect:/";
     }
 
     @PostMapping("/boards/{id}/update")
-    public String update(@PathVariable("id") int id, @RequestParam("title") String title,
-            @RequestParam("content") String content) {
-        boardService.게시글수정(id, title, content);
+    public String update(@PathVariable("id") int id, BoardRequest.SaveOrUpdateDto reqDTO) {
+
+        boardService.게시글수정(id, reqDTO.getTitle(), reqDTO.getContent());
         return "redirect:/boards/" + id;
     }
 
