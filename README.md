@@ -28,5 +28,5 @@
 - 그림 다운로드 (v)
 - user폴더 UserController 만들어서 그림 연결 (v)
 - user 테이블 생성 - 더미네이터 (v)
-- UserRepostitory만들어서 DB 테스터 코드
-- 컨트롤러, 서비스, 레포 연결해서 기능 완료하기
+- UserRepostitory만들어서 DB 테스터 코드 (v)
+- 컨트롤러, 서비스, 레포 연결해서 기능 완료하기 (v)

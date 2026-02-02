@@ -12,11 +12,11 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
-    public void save_fail_test() {
+    public void save_test() {
         // given
         User user = new User();
-        user.setUsername("ssar");
-        user.setPassword("6666");
+        user.setUsername("mi5");
+        user.setPassword("1234");
         user.setEmail("mi5qjgt@gmail.com");
 
         // when
