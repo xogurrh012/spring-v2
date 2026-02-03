@@ -4,10 +4,14 @@ import java.sql.Timestamp;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.boardv1.user.User;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +32,9 @@ public class Board {
     private String content;
     @CreationTimestamp
     private Timestamp createdAt;
+
+    // private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user; // user_id = 1 (select * from user_tb where id = 1)
 
 }
