@@ -6,36 +6,63 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 @Import(UserRepository.class)
-@DataJpaTest
+@DataJpaTest // EntityManger가 ioc에 등록됨
 public class UserRepositoryTest {
+
     @Autowired
     private UserRepository userRepository;
 
     @Test
-    public void save_test() {
+    public void findById_test() {
+        int id = 5;
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("해당 아이디로 유저를 찾을 수 없어요"));
+
+        System.out.println("user : " + user);
+    }
+
+    @Test
+    public void save_fail_test() {
         // given
-        User user = new User();
-        user.setUsername("mi5");
+        User user = new User(); // 비영속 객체
+        user.setUsername("cos");
         user.setPassword("1234");
-        user.setEmail("mi5qjgt@gmail.com");
+        user.setEmail("cos@nate.com");
 
         // when
-        User findUser = userRepository.save(user);
+        User findUser = userRepository.save(user); // 영속화됨
 
-        // eye (user 객체가 DB 데이터와 동기화되었음)
+        // eye
+        System.out.println(findUser);
+    }
+
+    @Test
+    public void save_test() {
+        // given
+        User user = new User(); // 비영속 객체
+        user.setUsername("love");
+        user.setPassword("1234");
+        user.setEmail("love@nate.com");
+
+        // when
+        User findUser = userRepository.save(user); // 영속화됨
+
+        // eye
         System.out.println(findUser);
     }
 
     @Test
     public void findByUsername_test() {
         // given
-        String username = "ssar";
+        String username = "good";
 
-        // when
-        User finduser = userRepository.findByUsername(username);
+        // when (ssar, 1234)
+        User findUser = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("해당 user를 찾을 수 없어요"));
 
         // eye
-        System.out.println(finduser);
-
+        System.out.println(findUser);
     }
+
 }
