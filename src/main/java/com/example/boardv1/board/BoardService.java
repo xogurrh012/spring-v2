@@ -20,7 +20,7 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public BoardResponse.DetailDTO 수정폼게시글정보(int id, Integer seeionUserId) {
+    public BoardResponse.DetailDTO 수정폼게시글정보(int id, int seeionUserId) {
         Board board = boardRepository.findByIdJoinUser(id)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
@@ -38,7 +38,7 @@ public class BoardService {
     }
 
     @Transactional // update, delete, insert 할때 붙이세요!!
-    public void 게시글수정(int id, String title, String content, Integer seeionUserId) {
+    public void 게시글수정(int id, String title, String content, int seeionUserId) {
         Board board = boardRepository.findByIdJoinUser(id)
                 .orElseThrow(() -> new RuntimeException("수정할 게시글을 찾을 수 없어요"));
         board.setTitle(title);
