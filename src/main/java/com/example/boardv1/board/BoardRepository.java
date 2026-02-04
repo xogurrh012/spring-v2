@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -31,13 +30,15 @@ public class BoardRepository {
             Board board = (Board) query.getSingleResult();
             return Optional.of(board);
         } catch (Exception e) {
+            e.printStackTrace();
             return Optional.ofNullable(null);
         }
     }
 
     public List<Board> findAll() {
-        return em.createQuery("select b from Board b order by b.id desc", Board.class)
-                .getResultList();
+        Query query = em.createQuery("select b from Board b order by b.id desc", Board.class);
+        List<Board> findBoards = query.getResultList(); // 객체지향쿼리
+        return findBoards;
     }
 
     public Board save(Board board) {

@@ -42,7 +42,7 @@ public class BoardRepositoryTest {
         int id = 1;
 
         // when
-        Board board = boardRepository.findById(id)
+        Board board = boardRepository.findByIdJoinUser(id)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없어요"));
         // boardRepository.findById(1);
 
@@ -67,7 +67,7 @@ public class BoardRepositoryTest {
     public void delete_test() {
         // given
         int id = 1;
-        Board board = boardRepository.findById(id)
+        Board board = boardRepository.findByIdJoinUser(id)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없어요"));
 
         // when
@@ -81,7 +81,7 @@ public class BoardRepositoryTest {
     public void update_test() {
         // given
         int id = 1;
-        Board board = boardRepository.findById(id)
+        Board board = boardRepository.findByIdJoinUser(id)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없어요요"));
 
         // when
@@ -104,16 +104,16 @@ public class BoardRepositoryTest {
         int id = 1;
 
         // when
-        boardRepository.findById(id);
+        boardRepository.findByIdJoinUser(id);
         em.clear();
-        boardRepository.findById(id);
+        boardRepository.findByIdJoinUser(id);
     }
 
     @Test
     public void orm_test() {
         int id = 1;
 
-        Board board = boardRepository.findById(id).get();
+        Board board = boardRepository.findByIdJoinUser(id).get();
         System.out.println("board->user->id : " + board.getUser().getId());
         System.out.println("------------------------------------------");
         System.out.println("board->user->username : " + board.getUser().getUsername());
@@ -123,7 +123,7 @@ public class BoardRepositoryTest {
     public void orm_v2_test() {
         int id = 1;
 
-        Board board = boardRepository.findById(id).get();
+        Board board = boardRepository.findByIdJoinUser(id).get();
         System.out.println(board.toString());
     }
 }

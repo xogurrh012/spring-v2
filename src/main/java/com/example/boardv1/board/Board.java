@@ -30,11 +30,12 @@ public class Board {
     private Integer id;
     private String title;
     private String content;
-    @CreationTimestamp
-    private Timestamp createdAt;
 
     // private Integer userId;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user; // user_id = 1 (select * from user_tb where id = 1)
+
+    @CreationTimestamp
+    private Timestamp createdAt;
 
 }
